@@ -22,6 +22,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Install gitleaks
         run: |
           curl -sSL https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz \
@@ -36,8 +37,10 @@ jobs:
         with:
           egress-policy: audit
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install zizmor
-      - run: zizmor .github/workflows
+      - run: zizmor --config .zizmor.yml .github/workflows
