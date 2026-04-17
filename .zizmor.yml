@@ -1,6 +1,12 @@
-# zizmor config — Dependabot owns action version bumps.
+# zizmor config — Dependabot owns action version bumps; the Claude workflows
+# are vendored from Anthropic and can't be edited without breaking the
+# signed-workflow validation those actions enforce.
 rules:
   unpinned-uses:
     config:
       policies:
         "*": any
+  artipacked:
+    ignore:
+      - claude.yml
+      - claude-code-review.yml
